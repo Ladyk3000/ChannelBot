@@ -1,6 +1,7 @@
 import telebot
 import os
 from dotenv import load_dotenv
+
 load_dotenv()
 
 
@@ -14,19 +15,12 @@ class TgBot:
         try:
             self.__bot.send_message(chat_id=self.__channel, text=post)
             return True
-        except:
+        except telebot.apihelper.ApiException:
             return False
 
     def send_theme(self, theme) -> bool:
         try:
             self.__bot.send_message(chat_id=self.__admin, text=f'Theme for today: {theme}')
             return True
-        except:
-            return False
-
-    def send_alive(self) -> bool:
-        try:
-            self.__bot.send_message(chat_id=self.__admin, text=f'OK')
-            return True
-        except:
+        except telebot.apihelper.ApiException:
             return False

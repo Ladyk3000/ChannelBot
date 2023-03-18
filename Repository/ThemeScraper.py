@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 import random
+import re
 
 
 class ThemeScraper:
@@ -9,8 +10,7 @@ class ThemeScraper:
         self.__event_class = 'masonry-item'
         self.__event_end = 'Читать полностью'
         self.__events = []
-        self.__theme = None
-        self.has_not_theme = True
+        self.theme = None
 
     def __get_events(self) -> None:
         try:
@@ -21,15 +21,13 @@ class ThemeScraper:
             print(f'smth wrong {e.message, e.args}')
 
     def __get_themes(self) -> list:
-        themes = []
-        if len(self.__events) == 0:
+        if not self.__events:
             self.__get_events()
+        themes = []
         for event in self.__events:
-            theme = event.text.rstrip().replace("\n", "").split(self.__event_end)[0]
+            theme = re.sub(r'\s+', ' ', event.text.split(self.__event_end)[0]).strip()
             themes.append(theme)
         return themes
 
     def get_theme(self):
-        self.has_not_theme = False
-        self.__theme = random.choice(self.__get_themes())
-        return self.__theme
+        return random.choice(self.__get_themes())
