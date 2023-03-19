@@ -21,10 +21,10 @@ class ChatGPT:
         openai.api_key = self.__openai_api_key
         try:
             response = openai.Completion.create(
-                engine="davinci",
+                engine="gpt-3.5-turbo",
                 prompt=prompt,
                 temperature=0.3,
-                max_tokens=1024,
+                max_tokens=600,
                 top_p=1,
                 frequency_penalty=0.5,
                 presence_penalty=0)

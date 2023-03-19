@@ -12,13 +12,8 @@ class ThemeScraper:
         self.__events = []
         self.theme = None
 
-    def __get_events(self) -> None:
-        try:
-            html = requests.get(self.__src_url).text
-            soup = BeautifulSoup(html, 'lxml')
-            self.__events = soup.find_all("div", {"class": self.__event_class})
-        except Exception as e:
-            print(f'smth wrong {e.message, e.args}')
+    def get_theme(self):
+        return random.choice(self.__get_themes())
 
     def __get_themes(self) -> list:
         if not self.__events:
@@ -29,5 +24,10 @@ class ThemeScraper:
             themes.append(theme)
         return themes
 
-    def get_theme(self):
-        return random.choice(self.__get_themes())
+    def __get_events(self) -> None:
+        try:
+            html = requests.get(self.__src_url).text
+            soup = BeautifulSoup(html, 'lxml')
+            self.__events = soup.find_all("div", {"class": self.__event_class})
+        except Exception as e:
+            print(f'smth wrong {e.message, e.args}')

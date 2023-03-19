@@ -18,10 +18,6 @@ class Timer:
                               time_obj.minute, 0)
         return self.__tz.localize(time_to_eq)
 
-    @staticmethod
-    def __is_greater_than_now(eq_time: datetime) -> bool:
-        return datetime.now() > eq_time
-
     def should_post(self):
         now = self.__tz.localize(datetime.now())
         if self.__start_post_time <= now <= self.__end_post_time and not self.posted_today:
