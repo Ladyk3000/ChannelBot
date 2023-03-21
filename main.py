@@ -1,6 +1,5 @@
 import time
 import random
-import datetime
 from Repository.ThemeScraper import ThemeScraper
 from Repository.Prompter import Prompter
 from Repository.ChatGPT import ChatGPT
@@ -17,7 +16,6 @@ def main():
     timer = Timer()
     keep_alive()
     while True:
-        print(datetime.datetime.now())
         if timer.should_post():
             theme = scraper.get_theme()
             bot.send_theme(theme)

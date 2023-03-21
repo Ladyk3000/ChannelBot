@@ -14,5 +14,5 @@ class Prompter:
         return query
 
     def generate_channel_post(self, theme: str, english_text: str) -> str:
-        post = f"{self.start_post.replace('*', theme)}{self.__translator.translate(text=english_text, src='en', dest='ru').text}".rstrip() + self.__end_conv
+        post = f"{self.start_post.replace('*', theme)}{self.__translator.translate(text=english_text, src='en', dest='ru').text}".rstrip()
         return post

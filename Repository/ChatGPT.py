@@ -20,15 +20,15 @@ class ChatGPT:
     def __get_chat_gpt_answer(self, prompt):
         openai.api_key = self.__openai_api_key
         try:
-            response = openai.Completion.create(
-                engine="gpt-3.5-turbo",
-                prompt=prompt,
+            response = openai.ChatCompletion.create(
+                model="gpt-3.5-turbo",
+                messages=[{"role": "user", "content": prompt}],
                 temperature=0.3,
                 max_tokens=600,
                 top_p=1,
                 frequency_penalty=0.5,
                 presence_penalty=0)
-            return response['choices'][0]['text']
+            return response['choices'][0]['message']['content']
         except Exception as e:
             print(f"Error generating text: {e}")
             return ""

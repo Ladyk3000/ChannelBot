@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 from pytz import timezone
 
 
@@ -19,7 +19,7 @@ class Timer:
         return self.__tz.localize(time_to_eq)
 
     def should_post(self):
-        now = self.__tz.localize(datetime.now())
+        now = self.__tz.localize(datetime.now() + timedelta(hours=3))
         if self.__start_post_time <= now <= self.__end_post_time and not self.posted_today:
             self.posted_today = True
             return True
